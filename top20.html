@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Crossref Labs Chronograph</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <link href="navbar.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+
+ <link type="text/css" rel="stylesheet" href="graph.css">
+
+        <link type="text/css" rel="stylesheet" href="legend.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="https://assets.crossref.org/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://assets.crossref.org/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://assets.crossref.org/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://assets.crossref.org/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://assets.crossref.org/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://assets.crossref.org/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://assets.crossref.org/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://assets.crossref.org/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://assets.crossref.org/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://assets.crossref.org/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://assets.crossref.org/favicon/manifest.json">
+    <link rel="mask-icon" href="https://assets.crossref.org/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="Crossref">
+    <meta name="application-name" content="Crossref">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="https://assets.crossref.org/favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">Chronograph</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="top20.html">Top 20</a></li>
+              <li><a href="http-https.html">HTTP vs HTTPS</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><img src="https://assets.crossref.org/logo/crossref-logo-200.svg" width="200" height="130" alt="Crossref logo"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div>
+        <h1>Top referring domains <strong id="domainname"></strong></h1>
+        <p class="lead">Top 10 non-primary-publisher referring domains per month from <span id="firstdate"></span> to <span id="lastdate"></span>.</p>
+
+        <div id="chartarea" class="col-sm-12">
+            <div id="chart_container" class="col-sm-12">
+              <div id="y_axis"></div>
+              <div id="chart"></div>
+            </div>
+
+            <div class="col-sm-4">
+              <div id="legend"></div>
+            </div>
+
+            <div class="col-sm-8">
+              <h3>Download the data</h3>
+              <ul>
+                <li><a href="/month-top-10-filtered-domains.csv">Top 10 referring non-primary-publisher domains per month</a></li>
+                <li><a href="/month-top-100-filtered-domains.csv">Top 100 referring non-primary-publisher domains per month</a></li>
+                <li><a href="/day-top-10-filtered-domains.csv">Top 10 referring non-primary-publisher domains per day</a></li>
+                <li><a href="/day-top-100-filtered-domains.csv">Top 100 referring non-primary-publisher domains per day</a></li>
+              </ul>
+            </div>
+            
+        </div>
+
+
+        <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Sorry</span>
+          There was an error fetching the data.
+        </div>
+
+      </div>
+
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            This is a <a href="http://labs.crossref.org">Crossref labs</a> project.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="http://code.shutterstock.com/rickshaw/vendor/d3.v3.js"></script>
+  <script src="http://code.shutterstock.com/rickshaw/rickshaw.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+
+  <script src="cryptojs/components/core.js"></script>
+  <script src="cryptojs/components/md5.js"></script>
+  <script src="chronograph.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+
+  <script>
+      $(function() {
+        fetchCSV("month-top-10-filtered-domains.csv", window.BASE_URL, function(chunk) {
+        if (chunk == null) {
+          $("#error").show();
+          $("#chartarea").hide();
+        } else {
+
+          var data = csvToDateChartData(chunk, true);
+
+          $("#firstdate").text(chunk[1].split(",")[0]);
+          $("#lastdate").text(chunk[chunk.length-1].split(",")[0]);
+          
+          var graph = new Rickshaw.Graph( {
+            element: document.getElementById("chart"),
+            interpolation: 'linear',
+            renderer: 'area',
+            height: 500,
+            width: 1000,
+            series: data
+          });
+
+          var x_axis = new Rickshaw.Graph.Axis.Time( {
+            graph: graph,
+            element: document.getElementById('x_axis'),
+          } );
+
+          var y_axis = new Rickshaw.Graph.Axis.Y({
+            graph: graph,
+            orientation: 'left',
+            tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+            element: document.getElementById('y_axis'),
+          } );
+
+          var legend = new Rickshaw.Graph.Legend( { 
+            element: document.querySelector('#legend'), 
+            graph: graph
+          });
+
+          var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight( {
+            graph: graph,
+            legend: legend
+          });
+
+          graph.render();
+        }});
+      });
+      </script>
+   
+
+  </body>
+</html>
