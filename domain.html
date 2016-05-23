@@ -66,14 +66,14 @@
               <li><a href="http-https.html">HTTP vs HTTPS</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><img src="https://assets.crossref.org/logo/crossref-logo-200.svg" width="200" height="130" alt="Crossref logo"></li>
+              <li><img src="https://assets.crossref.org/logo/crossref-logo-200.svg" width="100" alt="Crossref logo"></li>
             </ul>
           </div>
         </div>
       </nav>
 
       <div>
-        <h1>DOI Referrals from <strong id="domainname"></strong> per day</h1>
+        <h1>DOI Referrals from <strong id="domainname"></strong> <span id="unit"></span></h1>
 
         <div id="chartarea" class="col-sm-12">
           <div class="col-sm-12">
@@ -85,6 +85,8 @@
               <div id="y_axis"></div>
               <div id="chart"></div>
             </div>
+
+            <div id="listcontainer"></div>
           </div>
         </div>
 
@@ -147,7 +149,7 @@
             element: document.getElementById("chart"),
             renderer: 'line',
             interpolation: 'linear',
-            height: 500,
+            height: 300,
             width: 1000,
             series: [
               {
@@ -170,18 +172,35 @@
           graph.render();
         }}
 
+        function renderSeeAlsoDomainsList(domains) {
+          var list = $("<ul></ul>");
+
+          $.each(domains, function(i, domain){
+            list.append("<li><a href='/domain.html?domain=" + domain +"'>" + domain + "</li>");
+          });
+
+          $("#listcontainer").append("<h2>See also</h2>");
+          $("#listcontainer").append(list);
+        }
+
         // Try fetching the "domain". Failing that try fetching the "full domain". Failing that fail that. 
-        var base = window.BASE_URL + "day-filtered-domain.csv-chunks_";
-        fetchChunk(domain, base, function(chunk) {
+        fetchChunk(domain, window.BASE_URL + "day-filtered-domain.csv-chunks_", function(chunk) {
           if (chunk != null) {
             renderChunk(chunk);
+            $("#unit").text("per day");
+
+            // If it is a domain fetch the list of full-domains for it.
+            fetchChunk(domain, window.BASE_URL + "filtered-grouped-fulldomain.csv-chunks_", renderSeeAlsoDomainsList);
           } else {
-            base = window.BASE_URL + "month-filtered-fulldomain.csv-chunks_";
-            fetchChunk(domain, base, function(chunk) {
-              renderChunk(chunk);
+            fetchChunk(domain, window.BASE_URL + "month-filtered-fulldomain.csv-chunks_", function(chunk) {
+              if (chunk != null) {
+                renderChunk(chunk);
+                $("#unit").text("per month");
+                // If it is a domain fetch the single-length of domains for this fulldomain.
+                fetchChunk(domain, window.BASE_URL + "fulldomain-domain.csv-chunks_", renderSeeAlsoDomainsList);
+              }
             });
           }
-
         });
       })
       </script>
