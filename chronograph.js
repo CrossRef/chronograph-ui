@@ -1,4 +1,5 @@
-window.BASE_URL = "http://chronograph.s3-website-eu-west-1.amazonaws.com/";
+// In case the data is hosted elsewhere.
+window.BASE_URL = "/";
 
 // For csv chunks, extract the chunk with the given header.
 // Return array of lines or null.
