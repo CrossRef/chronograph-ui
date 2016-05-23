@@ -20,9 +20,9 @@
     <link href="style.css" rel="stylesheet">
 
 
- <link type="text/css" rel="stylesheet" href="graph.css">
+    <link type="text/css" rel="stylesheet" href="graph.css">
 
-        <link type="text/css" rel="stylesheet" href="legend.css">
+    <link type="text/css" rel="stylesheet" href="legend.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -66,7 +66,7 @@
               <li><a href="http-https.html">HTTP vs HTTPS</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><img src="https://assets.crossref.org/logo/crossref-logo-200.svg" width="200" height="130" alt="Crossref logo"></li>
+              <li><img src="https://assets.crossref.org/logo/crossref-logo-200.svg" width="100" alt="Crossref logo"></li>
             </ul>
           </div>
         </div>
@@ -76,26 +76,24 @@
         <h1>Top referring domains <strong id="domainname"></strong></h1>
         <p class="lead">Top 10 non-primary-publisher referring domains per month from <span id="firstdate"></span> to <span id="lastdate"></span>.</p>
 
-        <div id="chartarea" class="col-sm-12">
-            <div id="chart_container" class="col-sm-12">
+        <div class="col-sm-3">
+          <div id="legend"></div>
+        </div>
+        <div class="col-sm-9">
+          <div id="chartarea">
+            <div id="chart_container">
               <div id="y_axis"></div>
               <div id="chart"></div>
             </div>
-
-            <div class="col-sm-4">
-              <div id="legend"></div>
-            </div>
-
-            <div class="col-sm-8">
-              <h3>Download the data</h3>
-              <ul>
-                <li><a href="/month-top-10-filtered-domains.csv">Top 10 referring non-primary-publisher domains per month</a></li>
-                <li><a href="/month-top-100-filtered-domains.csv">Top 100 referring non-primary-publisher domains per month</a></li>
-                <li><a href="/day-top-10-filtered-domains.csv">Top 10 referring non-primary-publisher domains per day</a></li>
-                <li><a href="/day-top-100-filtered-domains.csv">Top 100 referring non-primary-publisher domains per day</a></li>
-              </ul>
-            </div>
             
+            <h3>Download the data</h3>
+            <ul>
+              <li><a href="/month-top-10-filtered-domains.csv">Top 10 referring non-primary-publisher domains per month</a></li>
+              <li><a href="/month-top-100-filtered-domains.csv">Top 100 referring non-primary-publisher domains per month</a></li>
+              <li><a href="/day-top-10-filtered-domains.csv">Top 10 referring non-primary-publisher domains per day</a></li>
+              <li><a href="/day-top-100-filtered-domains.csv">Top 100 referring non-primary-publisher domains per day</a></li>
+            </ul>
+          </div>
         </div>
 
 
@@ -148,8 +146,8 @@
             element: document.getElementById("chart"),
             interpolation: 'linear',
             renderer: 'area',
-            height: 500,
-            width: 1000,
+            height: 300,
+            width: 850,
             series: data
           });
 
