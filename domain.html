@@ -193,8 +193,10 @@
             fetchChunk(domain, window.BASE_URL + "filtered-grouped-fulldomain.csv-chunks_", renderSeeAlsoDomainsList);
           } else {
             fetchChunk(domain, window.BASE_URL + "month-filtered-fulldomain.csv-chunks_", function(chunk) {
+              // renderChunk will take a null show show an error if not exists.
+              renderChunk(chunk);
+
               if (chunk != null) {
-                renderChunk(chunk);
                 $("#unit").text("per month");
                 // If it is a domain fetch the single-length of domains for this fulldomain.
                 fetchChunk(domain, window.BASE_URL + "fulldomain-domain.csv-chunks_", renderSeeAlsoDomainsList);
