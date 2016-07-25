@@ -70,12 +70,24 @@
       <div class="col-sm-12">
         <h1 class="text-center">Chronograph</h1>
         <p class="lead">Chronograph analyzes which websites people come from when they click on a DOI.</p>
-        <p>Type a domain to see referrals from that domain to Crossref DOIs. Domains belonging to primary publishers are excluded.</p>
+        <h2>Referrals from domains to DOI resolutions</h2>
+        <p>Enter a domain to see referrals from that domain to Crossref DOIs. Domains belonging to primary publishers are excluded.</p>
         <form class="form-horizontal" method="get" action="domain.html">
           <div class="form-group form-group-lg">
             <label class="sr-only" for="domain">domain</label>
             <div class="col-sm-12">
               <input class="form-control input-lg" type="text" placeholder="e.g. wikipedia.org" id="domain" name="domain">
+            </div>
+          </div>
+        </form>
+
+        <h2>DOI resolutions</h2>
+        <p>Enter a DOI to see resolutions over time.</p>
+        <form class="form-horizontal" method="get" action="doi.html">
+          <div class="form-group form-group-lg">
+            <label class="sr-only" for="domain">domain</label>
+            <div class="col-sm-12">
+              <input class="form-control input-lg" type="text" placeholder="e.g. 10.1038/ng.3020" id="doi" name="doi">
             </div>
           </div>
         </form>
@@ -107,6 +119,15 @@
               <h2>Wikipedia example</h2>
             </a>
             <p>Wikipedia has a lot of DOIs, and they're followed.</p>
+          </div>
+        </div>
+
+        <div class="col-sm-6 demo-panel">
+          <div class="content">
+            <a href="doi.html?doi=10.1038/ng.3020">
+              <h2>DOI example</h2>
+            </a>
+            <p>See resolution data for the DOI 10.1038/ng.3020</p>
           </div>
         </div>
 
