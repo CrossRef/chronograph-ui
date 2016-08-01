@@ -192,6 +192,7 @@
             // If it is a domain fetch the list of full-domains for it.
             fetchChunk(domain, window.BASE_URL + "filtered-grouped-fulldomain.csv-chunks_", renderSeeAlsoDomainsList);
           } else {
+            // If we failed to retrieve anything, try it as a full-domain.
             fetchChunk(domain, window.BASE_URL + "month-filtered-fulldomain.csv-chunks_", function(chunk) {
               // renderChunk will take a null show show an error if not exists.
               renderChunk(chunk);
