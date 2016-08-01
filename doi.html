@@ -148,7 +148,7 @@
           
           var graph = new Rickshaw.Graph( {
             element: document.getElementById("chart"),
-            renderer: 'line',
+            renderer: 'bar',
             interpolation: 'linear',
             height: 300,
             width: 1000,
@@ -174,9 +174,9 @@
         }}
 
         // Try fetching the DOI. 
-        fetchChunk(doi, window.BASE_URL + "day-doi.csv-chunks_", function(chunk) {
+        fetchChunk(doi, window.BASE_URL + "month-doi.csv-chunks_", function(chunk) {
           renderChunk(chunk);
-          $("#unit").text("per day");
+          $("#unit").text("per month");
         });
       });
       </script>
