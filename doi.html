@@ -125,6 +125,7 @@
   <script>
       $(function() {
         var doi = window.location.search.substring(1);
+        var DOI_PREFIX_LENGTH = 4;
 
         if (doi.startsWith("doi")) {
           // Decode the slash in the DOI.
@@ -174,7 +175,7 @@
         }}
 
         // Try fetching the DOI. 
-        fetchChunk(doi, window.BASE_URL + "month-doi.csv-chunks_", function(chunk) {
+        fetchChunk(doi, DOI_PREFIX_LENGTH, window.BASE_URL + "month-doi.csv-chunks_", function(chunk) {
           renderChunk(chunk);
           $("#unit").text("per month");
         });

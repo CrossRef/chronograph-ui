@@ -125,6 +125,7 @@
   <script>
       $(function() {
         var domain = window.location.search.substring(1);
+        var DOMAIN_PREFIX_LENGTH = 3;
 
         if (domain.startsWith("domain")) {
           domain = domain.substring(7);
@@ -184,23 +185,23 @@
         }
 
         // Try fetching the "domain". Failing that try fetching the "full domain". Failing that fail that. 
-        fetchChunk(domain, window.BASE_URL + "day-filtered-domain.csv-chunks_", function(chunk) {
+        fetchChunk(domain, DOMAIN_PREFIX_LENGTH, window.BASE_URL + "day-filtered-domain.csv-chunks_", function(chunk) {
           if (chunk != null) {
             renderChunk(chunk);
             $("#unit").text("per day");
 
             // If it is a domain fetch the list of full-domains for it.
-            fetchChunk(domain, window.BASE_URL + "filtered-grouped-fulldomain.csv-chunks_", renderSeeAlsoDomainsList);
+            fetchChunk(domain, DOMAIN_PREFIX_LENGTH, window.BASE_URL + "filtered-grouped-fulldomain.csv-chunks_", renderSeeAlsoDomainsList);
           } else {
             // If we failed to retrieve anything, try it as a full-domain.
-            fetchChunk(domain, window.BASE_URL + "month-filtered-fulldomain.csv-chunks_", function(chunk) {
+            fetchChunk(domain, DOMAIN_PREFIX_LENGTH, window.BASE_URL + "month-filtered-fulldomain.csv-chunks_", function(chunk) {
               // renderChunk will take a null show show an error if not exists.
               renderChunk(chunk);
 
               if (chunk != null) {
                 $("#unit").text("per month");
                 // If it is a domain fetch the single-length of domains for this fulldomain.
-                fetchChunk(domain, window.BASE_URL + "fulldomain-domain.csv-chunks_", renderSeeAlsoDomainsList);
+                fetchChunk(domain, DOMAIN_PREFIX_LENGTH, window.BASE_URL + "fulldomain-domain.csv-chunks_", renderSeeAlsoDomainsList);
               }
             });
           }

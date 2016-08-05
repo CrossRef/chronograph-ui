@@ -33,9 +33,10 @@ function extractChunk(data, header) {
 
 // Fetch named chunk from remote server.
 // Return array of lines or null for not found.
-function fetchChunk(key, base, callback) {
+// Different types have different has prefix lengths.
+function fetchChunk(key, prefixLength, base, callback) {
   var hash = CryptoJS.MD5(key);
-  var filename = base + hash.toString(CryptoJS.enc.Hex).substring(0, 3).toUpperCase();
+  var filename = base + hash.toString(CryptoJS.enc.Hex).substring(0, prefixLength).toUpperCase();
   $.get(filename, function(responseText) {
     var chunk = extractChunk(responseText, key);
     callback(chunk);
